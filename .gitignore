@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+build/
+dist/
+
+# Virtualenvs
+.venv/
+venv/
+venv*/
+
+# Secrets — DO NOT COMMIT
+.env
+.env.*
+!.env.example
+secrets/
+*.pem
+*.key
+*.crt
+
+# Runtime
+*.log
+*.pid
+*.sock
+.tmp/
+.cache/
+
+# Editors / OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Local memory content — the library/ directory ships as a TEMPLATE.
+# If you fill it with your own memories, do not commit them.
+# Uncomment the next line to keep personal library content out of git:
+# library/
+
+# Scratch
+scratch/
+*.bak
