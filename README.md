@@ -1,5 +1,9 @@
 # ai_agent_memory
 
+**Long-term memory for AI agents** that survives between sessions. One index file, one pointer per topic, everything else plain Markdown — portable, git-friendly and framework-agnostic. No database required.
+
+*Keywords: AI agent memory, long-term memory, persistent memory, agent memory library, memory management, knowledge base, knowledge graph, context management, second brain, personal knowledge management, Markdown, local-first, self-hosted, Python.*
+
 <p align="center">
   <img src="docs/social-preview.jpg" alt="ai_agent_memory — social preview" width="600">
 </p>
