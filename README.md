@@ -1,5 +1,9 @@
 # ai_agent_memory
 
+<p align="center">
+  <img src="docs/social-preview.jpg" alt="ai_agent_memory — social preview" width="600">
+</p>
+
 **A long-term memory library for AI agents.**
 
 An agent that forgets everything between sessions isn't an agent — it's a
