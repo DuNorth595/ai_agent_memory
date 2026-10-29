@@ -594,6 +594,16 @@ Yes — the same structure works as a shared team knowledge base. The
 
 ---
 
+## Releases
+
+| Version | Date | Highlights |
+|---|---|---|
+| [v0.1.0](https://github.com/DuNorth595/ai_agent_memory/releases/tag/v0.1.0) | 2026-10-27 | First tagged release. The four-layer memory architecture, the `library/` structure, and the conventions that keep it healthy. |
+
+See [CHANGELOG.md](CHANGELOG.md) for the full history.
+
+---
+
 ## License
 
 MIT — see [LICENSE](LICENSE).
