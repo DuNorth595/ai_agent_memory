@@ -542,6 +542,18 @@ Run the audit weekly:
 scripts/audit_memory.py
 ```
 
+This repository runs the audit on every push, with `--check-links` so a
+pointer to a file that has been renamed fails the build rather than
+lingering:
+
+```
+$ scripts/audit_memory.py --check-links
+✓ Clean — no problems found.
+```
+
+The workflow also checks that the maintenance scripts still run and that
+every file carries its SPDX licence header.
+
 **The most important audit is the one you don't automate:** read your
 own rules every few weeks and ask whether you'd still follow them. A
 rule you stopped believing is worse than no rule, because the agent
@@ -598,6 +610,7 @@ Yes — the same structure works as a shared team knowledge base. The
 
 | Version | Date | Highlights |
 |---|---|---|
+| [v0.2.0](https://github.com/DuNorth595/ai_agent_memory/releases/tag/v0.2.0) | 2026-10-29 | CI on every push: the library health check runs automatically, with pointer-resolution, script-smoke, and SPDX licence checks. |
 | [v0.1.0](https://github.com/DuNorth595/ai_agent_memory/releases/tag/v0.1.0) | 2026-10-27 | First tagged release. The four-layer memory architecture, the `library/` structure, and the conventions that keep it healthy. |
 
 See [CHANGELOG.md](CHANGELOG.md) for the full history.

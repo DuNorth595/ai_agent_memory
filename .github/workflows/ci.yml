@@ -1,0 +1,62 @@
+# SPDX-FileCopyrightText: 2026 Justin Douglas
+# SPDX-License-Identifier: MIT
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+# Cancel in-progress runs on the same branch when a new push lands.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    name: memory library audit
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      # The library is the product. scripts/audit_memory.py is the health
+      # check that says whether the structure is still sound: the index is
+      # within its size budget, every library file is reachable from a
+      # chapter index, every archive has a RECOVERY_README.md, every file
+      # carries frontmatter and a Last-updated header, and every pointer in
+      # an index resolves to a file that exists.
+      #
+      # It exits non-zero on any problem, so it is a gate, not a report.
+      # --check-links turns on the pointer-resolution check, which is the
+      # one that catches a renamed or moved file.
+      - name: Audit the memory library
+        run: python3 scripts/audit_memory.py --check-links
+
+      # The scripts are the tool the library ships for its own upkeep, so
+      # they have to keep working. A broken audit script is a broken
+      # product, and nobody notices until they need it.
+      - name: Check the maintenance scripts still run
+        run: |
+          python3 scripts/audit_memory.py --help > /dev/null
+          python3 scripts/build_index.py --help > /dev/null
+          for script in scripts/*.sh; do
+            bash -n "$script"
+          done
+
+      # The repository ships its own licence metadata. reuse lint checks
+      # that every file carries an SPDX header or is covered by a
+      # .reuse/dep5 entry. It is the check that keeps the MIT licence
+      # attached to every file in the tree.
+      - name: Check the SPDX and REUSE metadata
+        run: |
+          python3 -m pip install --upgrade pip
+          python3 -m pip install reuse
+          reuse lint

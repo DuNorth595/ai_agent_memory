@@ -4,6 +4,33 @@ All notable changes to **ai_agent_memory** are documented here. Format
 follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); dates
 are ISO 8601.
 
+## [0.2.0] — 2026-10-29
+
+Continuous checks on the library.
+
+The library shipped its own health check — `scripts/audit_memory.py` —
+and nothing ran it. A structure that rots needs the rot to be caught by
+something other than a person remembering to look.
+
+### Added
+
+- **A CI workflow** that runs on every push and every pull request. It
+  runs `audit_memory.py --check-links`, so a pointer to a file that has
+  been renamed fails the build rather than lingering. It also checks that
+  the maintenance scripts still run — a broken audit script is a broken
+  product, and nobody notices until they need it — and that every file in
+  the tree still carries its SPDX licence header.
+
+### Changed
+
+- The README's Auditing section now says the audit runs on every push,
+  and shows the command CI runs.
+
+### Removed
+
+- The `feature/social-preview` branch. It was fully merged into `main`
+  and served no open pull request.
+
 ## [0.1.0] — 2026-10-27
 
 First tagged release.
